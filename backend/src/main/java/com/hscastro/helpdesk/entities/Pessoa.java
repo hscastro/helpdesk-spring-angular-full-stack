@@ -18,6 +18,7 @@ public abstract class Pessoa implements Serializable {
 	private Set<Perfil> perfis = new HashSet<>();
 	private LocalDate dataCriacao = LocalDate.now();
 	
+	
 	public Pessoa() {
 		// TODO Auto-generated constructor stub
 	}
