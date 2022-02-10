@@ -5,18 +5,43 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Entity
 public abstract class Pessoa implements Serializable {
 	
 	private static final long serialVersionUID = 524995154875837873L;
 	
-	private Integer id;
-	private String nome;
-	private String cpf;
-	private String email;
-	private String senha;
-	private Set<Perfil> perfis = new HashSet<>();
-	private LocalDate dataCriacao = LocalDate.now();
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Integer id;
+	
+	protected String nome;
+	
+	@Column(unique = true)
+	protected String cpf;
+	
+	@Column(unique = true)
+	protected String email;
+	protected String senha;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIS")
+	protected Set<Perfil> perfis = new HashSet<>();
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	protected LocalDate dataCriacao = LocalDate.now();
 	
 	
 	public Pessoa() {
@@ -34,6 +59,7 @@ public abstract class Pessoa implements Serializable {
 		this.perfis = perfis;
 		this.dataCriacao = dataCriacao;
 	}
+	
 
 	public Integer getId() {
 		return id;
@@ -76,11 +102,11 @@ public abstract class Pessoa implements Serializable {
 	}
 
 	public Set<Perfil> getPerfis() {
-		return perfis;
+		return perfis.stream().map(x -> Perfil.toEnum(getId())).collect(Collectors.toSet());
 	}
 
-	public void setPerfis(Set<Perfil> perfis) {
-		this.perfis = perfis;
+	public void addPerfil(Perfil perfil) {
+		this.perfis.add(perfil);
 	}
 
 	public LocalDate getDataCriacao() {
