@@ -24,16 +24,23 @@ import { MatCardModule } from '@angular/material/card';
 //componentes do projeto
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './components/home/home.component';
+<<<<<<< HEAD
 import { HeaderComponent } from './components/header/header.component';
 import { TecnicoListComponent } from './components/tecnico/tecnico-list/tecnico-list.component';
+=======
+>>>>>>> d36df437f25bc1d96bc9c572325e525578321695
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
+<<<<<<< HEAD
     HomeComponent,
     HeaderComponent,
     TecnicoListComponent
+=======
+    HomeComponent
+>>>>>>> d36df437f25bc1d96bc9c572325e525578321695
   ],
   imports: [
     BrowserModule,

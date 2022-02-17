@@ -9,8 +9,12 @@ const routes: Routes = [
   {
     path: '',
     component: NavComponent, children:[
+<<<<<<< HEAD
       {path: 'home', component: HomeComponent },
       {path: 'tecnicos', component: TecnicoListComponent }
+=======
+      {path: 'home', component: HomeComponent }
+>>>>>>> d36df437f25bc1d96bc9c572325e525578321695
     ]
   }
 ];
